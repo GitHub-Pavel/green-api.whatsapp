@@ -112,7 +112,7 @@ const ChatPage: FC = () => {
                         {!currentChat ? (
                             <div className="grid flex-1 place-items-center pt-24 px-6 lg:px-8 h-full">
                                 <div className="text-center">
-                                    <p className="font-semibold text-green-500">Green API WhatsApp</p>
+                                    <p className="font-semibold text-green">Green API WhatsApp</p>
                                     <h1 className="mt-4 text-3xl font-medium tracking-tight sm:text-5xl">Select chat</h1>
                                 </div>
                             </div>

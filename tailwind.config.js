@@ -10,7 +10,8 @@ module.exports = {
         'track': 'var(--panel-header-background)',
         'green': 'var(--button-secondary)',
         'green-hover': 'var(--button-secondary-hover)',
-        'gray': 'var(--button-disabled)'
+        'gray': 'var(--background-default-active)',
+        'input': 'var(--avatar-circle-gray-dark)'
       },
     },
   },

@@ -50,6 +50,7 @@ const Wrap = styled.div`
     width: 700px;
     overflow: hidden;
     padding: 58px 80px 58px 52px;
+    color: #41525d;
 
     @media screen and (max-width: 660px) {
         border-radius: 0;
@@ -77,7 +78,7 @@ const AuthPage: FC = () => {
                 <Logo />
             </Header>
             <Wrap>
-                <Title className="text-gray-800 mb-12">Enter your data from <span className="text-strong">GREEN-API</span></Title>
+                <Title className="mb-12">Enter your data from <span className="text-strong">GREEN-API</span></Title>
                 <AuthorizationForm />
             </Wrap>
         </Layout>

@@ -85,7 +85,7 @@ const AuthorizationForm: FC = () => {
     return (
         <form onSubmit={onSubmit}>
             <div className="mb-8">
-                <label htmlFor="price" className="block text-md font-medium leading-6 mb-2 text-gray-800">
+                <label htmlFor="price" className="block text-md font-medium leading-6 mb-2">
                     IdInstance
                 </label>
                 <input
@@ -93,9 +93,9 @@ const AuthorizationForm: FC = () => {
                     autoComplete="off"
                     placeholder="8746273910"
                     className={classNames(
-                        "block w-full rounded-md border-0 py-2 px-3 text-gray-800 ring-1 ring-inset placeholder:text-gray-400 sm:text-sm sm:leading-6",
+                        "block w-full rounded-md border-0 py-2 px-3 ring-1 ring-inset sm:text-sm sm:leading-6",
                         {
-                            "ring-gray-300": !errors.IdInstance,
+                            "ring-input": !errors.IdInstance,
                             "ring-red-500": errors.IdInstance
                         }
                     )}
@@ -106,7 +106,7 @@ const AuthorizationForm: FC = () => {
                 )}
             </div>
             <div className="mb-12">
-                <label htmlFor="price" className="block text-md font-medium leading-6 mb-2 text-gray-800">
+                <label htmlFor="price" className="block text-md font-medium leading-6 mb-2">
                     ApiTokenInstance
                 </label>
                 <input
@@ -114,9 +114,9 @@ const AuthorizationForm: FC = () => {
                     autoComplete="off"
                     placeholder="95fb56edfc5445398a401de3710a7acbb6ede8d3f18f4341d0"
                     className={classNames(
-                        "block w-full rounded-md border-0 py-2 px-3 text-gray-800 ring-1 ring-inset placeholder:text-gray-400 sm:text-sm sm:leading-6",
+                        "block w-full rounded-md border-0 py-2 px-3 ring-1 ring-inset sm:text-sm sm:leading-6",
                         {
-                            "ring-gray-300": !errors.apiTokenInstance,
+                            "ring-input": !errors.apiTokenInstance,
                             "ring-red-500": errors.apiTokenInstance
                         }
                     )}
