@@ -9,20 +9,20 @@ export type PageType = {
 
 export const authorized: PageType[] = [
     {
-        path: '/',
+        path: '/green-api.whatsapp/',
         key: 'home',
-        element: <Navigate to="/chat" replace />
+        element: <Navigate to="/green-api.whatsapp/chat" replace />
     },
     {
         key: 'chat',
-        path: '/chat',
+        path: '/green-api.whatsapp/chat',
         element: <ChatPage />
     }
 ];
 
 export const unauthorized: PageType[] = [
     {
-        path: '/',
+        path: '/green-api.whatsapp/',
         key: 'auth',
         element: <AuthPage />
     }
