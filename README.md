@@ -2,7 +2,7 @@
 
 ### How to start?
 
- - Download repository and then
+ - Download repository
  - npm install
  - npm build
  - npm start
