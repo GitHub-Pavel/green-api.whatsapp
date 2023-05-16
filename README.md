@@ -2,7 +2,6 @@
 
 ### How to start?
 
- - Download repository
- - npm install
- - npm build
- - npm start
+ - yarn/npm install
+ - yarn/npm build
+ - yarn/npm start
