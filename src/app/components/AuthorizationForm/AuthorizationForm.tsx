@@ -14,6 +14,11 @@ import { ContactData } from "app/api/get-contact";
 
 const Button = styled.button`
     min-width: 130px;
+
+    @media screen and (max-width: 660px) {
+        width: 100%;
+        text-align: center;
+    }
 `;
 
 const schema = yup.object({

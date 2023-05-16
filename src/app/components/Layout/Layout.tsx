@@ -24,7 +24,6 @@ const Wrap = styled.div`
 
     @media screen and (max-width: 660px) {
         position: relative;
-        min-width: 520px;
         padding: 0;
     }
 `;

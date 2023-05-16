@@ -2682,3 +2682,13 @@ body {
 svg {
     display: inline-block;
 }
+
+html {
+    @media screen and (max-width: 660px) {
+        font-size: 14px;
+    }
+    
+    @media screen and (max-width: 500px) {
+        font-size: 13px;
+    }
+} 

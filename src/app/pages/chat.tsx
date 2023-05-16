@@ -6,15 +6,33 @@ import { Avatar, ChangeThemeInput, Chat, ChatsList, ContactForm, Layout } from "
 import { deleteNotification, getContact, getStateInstance, receiveNotification } from "app/api";
 import { commonActions } from "app/store";
 import { ChatData } from "app/store/slices/commonSlice";
+import classNames from "classnames";
 
 const Content = styled.div`
     width: 100%;
     max-width: 1600px;
     padding: 20px 0;
+
+    @media screen and (max-width: 660px) {
+        padding: 0;
+    }
 `;
 
 const Sidebar = styled.div`
     background-color: var(--background-default);
+    width: 33.333333%;
+
+    @media screen and (max-width: 1025px) {
+        width: 40%;
+    }
+
+    @media screen and (max-width: 790px) {
+        width: 290px;
+    }
+    
+    @media screen and (max-width: 660px) {
+        width: 100%;
+    }
 `;
 
 const SidebarHeader= styled.header`
@@ -45,6 +63,30 @@ const ChatWrap = styled.div`
 
 const ChatContent = styled.div`
     position: relative;
+    width: 66.666667%;
+
+    @media screen and (max-width: 1025px) {
+        width: 60%;
+    }
+    
+    @media screen and (max-width: 790px) {
+        width: auto;
+        flex: 1 1;
+    }
+    
+    @media screen and (max-width: 660px) {
+        position: absolute;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        display: none;
+
+        .chat-active & {
+            display: block;
+        }
+    }
 `;
 
 const ChatPage: FC = () => {
@@ -97,8 +139,8 @@ const ChatPage: FC = () => {
 
     return (
         <Layout>
-            <Content className="flex flex-wrap h-screen">
-                <Sidebar className="w-4/12">
+            <Content className={classNames("flex flex-wrap h-screen", {"chat-active": currentChat})}>
+                <Sidebar>
                     <SidebarHeader className="flex items-center space-x-4 px-3.5 py-2.5">
                         <Avatar contact={user}/>
                         <ChangeThemeInput />
@@ -107,7 +149,7 @@ const ChatPage: FC = () => {
                     <ChatsList />
                 </Sidebar>
 
-                <ChatContent className="w-8/12">
+                <ChatContent>
                     <ChatWrap>
                         {!currentChat ? (
                             <div className="grid flex-1 place-items-center pt-24 px-6 lg:px-8 h-full">

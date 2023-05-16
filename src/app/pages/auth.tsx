@@ -5,6 +5,7 @@ import { FC } from "react"
 const Plate = styled.div`
     position: absolute;
     top: 0;
+    left: 0;
     z-index: -1;
     width: 100%;
     height: 222px;
@@ -32,8 +33,8 @@ const Header = styled.div`
 
     @media screen and (max-width: 660px) {
         box-sizing: border-box;
-        padding-right: 36px;
-        padding-left: 36px;
+        padding-right: 30px;
+        padding-left: 30px;
     }
 `;
 
@@ -52,12 +53,13 @@ const Wrap = styled.div`
     padding: 58px 80px 58px 52px;
     color: #41525d;
 
-    @media screen and (max-width: 660px) {
-        border-radius: 0;
-    }
-
     @media screen and (max-width: 795px) {
         width: 100%;
+    }
+
+    @media screen and (max-width: 660px) {
+        border-radius: 0;
+        padding: 30px 30px 60px;
     }
 `;
 
@@ -66,7 +68,7 @@ const Title = styled.div`
     font-size: 30px;
 
     @media screen and (max-width: 795px) {
-        font-size: 24px;
+        font-size: 1.5rem;
     }
 `;
 
