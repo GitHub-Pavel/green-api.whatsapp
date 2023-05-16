@@ -9,7 +9,7 @@ const setSettings = async ( user: UserData | UserFormData | null ) => {
         const headers = {"Content-Type": "application/json"};
         const body = {
             "webhookUrl": "",
-            "outgoingWebhook": "no",
+            "outgoingWebhook": "yes",
             "stateWebhook": "yes",
             "incomingWebhook": "yes"
         };
