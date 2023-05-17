@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "./store";
 import { ChatData, commonActions } from "app/store/slices/commonSlice";
 import { deleteNotification, getContact, getStateInstance, receiveNotification } from "app/api";
@@ -8,7 +8,7 @@ export const useChat = () => {
     const dispatch = useAppDispatch();
     const [error, setError] = useState<boolean>(false); 
     const {user, chats} = useAppSelector((store) => store.common);
-    const issetChat = async (chatId: string) => {
+    const issetChat = useCallback(async (chatId: string) => {
         if (!chats[chatId]) {
             const contact = await getContact(chatId, user);
 
@@ -17,7 +17,7 @@ export const useChat = () => {
                 dispatch(commonActions.addChat({[chatId]: currentContact}));
             }
         }
-    };
+    }, [user]);
 
     useEffect(() => {
         const int = setInterval(async () => {
