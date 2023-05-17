@@ -11,6 +11,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { SettingsData } from "app/api/get-settings";
 import { getContact, getSettings, getStateInstance, setSettings } from "app/api";
 import { ContactData } from "app/api/get-contact";
+import { unknownError } from "app/utils";
 
 const Button = styled.button`
     min-width: 130px;
@@ -42,10 +43,6 @@ const AuthorizationForm: FC = () => {
     const { handleSubmit, register, formState: { errors } } = useForm<UserFormData>({
         resolver: yupResolver(schema)
     });
-    const wrong = (is: unknown, callback: Function) => {
-        if (is) return callback();
-        setError("Something went wrong...");
-    }
     
     const onSubmit = handleSubmit(async (user) => {
         try {
@@ -56,14 +53,14 @@ const AuthorizationForm: FC = () => {
             if (stateInstance === "authorized") {
                 const settingsData = await setSettings(user);
 
-                wrong(settingsData, async () => {
+                unknownError(settingsData, setError, async () => {
                     const userSettings = await getSettings(user);
 
-                    wrong(Boolean( userSettings ), async () => {
+                    unknownError(userSettings, setError, async () => {
                         const settings = userSettings as SettingsData;
                         const userContact = await getContact(settings.wid, user);
 
-                        wrong(Boolean( userContact ), async () => {
+                        unknownError(userContact, setError, async () => {
                             const contact = userContact as ContactData;
 
                             if (apiError) setError(false);

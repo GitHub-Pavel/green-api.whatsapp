@@ -1,12 +1,8 @@
 import type { FC } from "react"
-import { useEffect } from "react";
-import { styled } from "styled-components";
-import { useAppDispatch, useAppSelector } from "app/hooks";
-import { Avatar, ChangeThemeInput, Chat, ChatsList, ContactForm, Layout } from "app/components";
-import { deleteNotification, getContact, getStateInstance, receiveNotification } from "app/api";
-import { commonActions } from "app/store";
-import { ChatData } from "app/store/slices/commonSlice";
 import classNames from "classnames";
+import { styled } from "styled-components";
+import { useAppSelector, useChat } from "app/hooks";
+import { Avatar, ChangeThemeInput, Chat, ChatsList, ContactForm, Layout } from "app/components";
 
 const Content = styled.div`
     width: 100%;
@@ -90,52 +86,11 @@ const ChatContent = styled.div`
 `;
 
 const ChatPage: FC = () => {
-    const dispatch = useAppDispatch();
-    const {user, currentChat, chats} = useAppSelector((store) => store.common);
-    const issetChat = async (chatId: string) => {
-        if (!chats[chatId]) {
-            const contact = await getContact(chatId, user);
+    const {user, currentChat} = useAppSelector((store) => store.common);
 
-            if (contact) {
-                const currentContact: ChatData = {...contact, messages: []};
-                dispatch(commonActions.addChat({[chatId]: currentContact}));
-            }
-        }
-    };
+    const chatError = useChat();
 
-    useEffect(() => {
-        const int = setInterval(async () => {
-            try {
-                const response = await receiveNotification(user);
-                const webhookBody = response && response.body;
-                
-                if (!webhookBody) return;
-
-                if (webhookBody.typeWebhook === 'incomingMessageReceived' || webhookBody.typeWebhook === 'outgoingMessageReceived') {
-                    await issetChat(webhookBody.senderData.chatId);
-                    dispatch(commonActions.addMessage(webhookBody));
-                }
-                
-                if (webhookBody.typeWebhook === 'stateInstanceChanged') {
-                    const stateInstance = await getStateInstance(user);
-
-                    if (stateInstance !== "authorized")
-                        dispatch(commonActions.setUser(null));
-                }
-
-                if (response.receiptId)
-                    await deleteNotification(user, response.receiptId);
-            } catch (ex) {
-                console.error(ex);
-            }
-        }, 5000);
-
-        return () => {
-            clearInterval(int);
-        };
-    }, []);
-
-    if (!user) return null;
+    if (!user || chatError) return null;
 
     return (
         <Layout>

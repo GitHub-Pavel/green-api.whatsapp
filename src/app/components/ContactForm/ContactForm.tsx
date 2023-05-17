@@ -11,6 +11,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { checkWhatsapp, getContact } from "app/api";
 import { commonActions } from "app/store";
 import { ChatData } from "app/store/slices/commonSlice";
+import { unknownError } from "app/utils";
 
 const FormBox = styled.div`
     display: flex;
@@ -57,10 +58,6 @@ const ContactForm: FC = () => {
         resolver: yupResolver(schema)
     });
     const inputHandler = () => apiError && setError(false);
-    const wrong = (is: unknown, callback: Function) => {
-        if (is) return callback();
-        setError("Something went wrong...");
-    }
 
     const onSubmit = handleSubmit(async (data) => {
         try {
@@ -68,7 +65,7 @@ const ContactForm: FC = () => {
 
             const checkedData = await checkWhatsapp(data.phoneNumber, user);
 
-            wrong(checkedData, async () => {
+            unknownError(checkedData, setError, async () => {
                 const chatId: string = `${data.phoneNumber}@c.us`;
                 const contact = await getContact(chatId, user);
 
